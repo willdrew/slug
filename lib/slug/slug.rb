@@ -18,7 +18,11 @@ module Slug
     def slug source, opts={}
       class_inheritable_accessor :slug_source, :slug_column
       include InstanceMethods
-      
+
+      class << self
+        alias_method_chain :find, :slug
+      end
+
       self.slug_source = source
       
       self.slug_column = opts.has_key?(:column) ? opts[:column] : :slug
@@ -30,6 +34,18 @@ module Slug
       validates_uniqueness_of   self.slug_column, uniqueness_opts
       validates_format_of       self.slug_column, :with => /^[a-z0-9-]+$/, :message => "contains invalid characters. Only downcase letters, numbers, and '-' are allowed."
       before_validation_on_create :set_slug 
+    end
+
+    def find_with_slug(*args)
+      key = args.first
+      if key.is_a?(Symbol) || key.kind_of?(Numeric) || key.kind_of?(Array) || key =~ /^\d+$/
+        find_without_slug(*args)
+      else
+        options = {:conditions => ["#{slug_column} = ?", key]}
+        with_scope(:find => options) do
+          find_without_slug(:first) || raise(ActiveRecord::RecordNotFound.new("Couldn't find #{name} with #{slug_column} '#{key}'"))
+        end
+      end
     end
   end
   
