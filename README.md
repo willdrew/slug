@@ -70,3 +70,6 @@ A few notes:
 == AUTHOR
 
 Ben Koski, ben.koski@gmail.com
+
+with generous contributions from:
+Derek Willis, @derekwillis
