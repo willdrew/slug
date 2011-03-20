@@ -33,7 +33,7 @@ module Slug
       validates_presence_of     self.slug_column, :message => "cannot be blank. Is #{self.slug_source} sluggable?"
       validates_uniqueness_of   self.slug_column, uniqueness_opts
       validates_format_of       self.slug_column, :with => /^[a-z0-9-]+$/, :message => "contains invalid characters. Only downcase letters, numbers, and '-' are allowed."
-      before_validation_on_create :set_slug 
+      before_validation :set_slug, :on => :create
     end
 
     def find_with_slug(*args)
