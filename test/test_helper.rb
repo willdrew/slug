@@ -15,7 +15,7 @@ end
 require 'active_record'
 require 'active_support'
 
-$LOAD_PATH.unshift(File.dirname(__FILE__))
+$LOAD_PATH.unshift(File.join(File.dirname(__FILE__), '../lib'))
 require 'slug'
 
 ActiveRecord::Base.establish_connection :adapter => "sqlite3", :database => ":memory:"
@@ -23,4 +23,4 @@ silence_stream(STDOUT) do
   load(File.dirname(__FILE__) + "/schema.rb")
 end
 
-require 'models'
+require_relative '../test/models'

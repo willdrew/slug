@@ -1,0 +1,2 @@
+rake -v10.0.3
+bundler -v1.3.2

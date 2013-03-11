@@ -14,10 +14,10 @@ begin
   end
   Jeweler::GemcutterTasks.new
 rescue LoadError
-  puts "Jeweler not available. Install it with: sudo gem install technicalpickles-jeweler -s http://gems.github.com"
+  puts 'Jeweler not available. In order to run jeweler, please run: bundle install'
 end
 
-require 'rake/rdoctask'
+require 'rdoc/task'
 Rake::RDocTask.new do |rdoc|
   rdoc.rdoc_dir = 'rdoc'
   rdoc.title = 'slug'
@@ -34,14 +34,15 @@ Rake::TestTask.new(:test) do |t|
 end
 
 begin
-  require 'rcov/rcovtask'
-  Rcov::RcovTask.new do |t|
-    t.libs << 'test'
-    t.test_files = FileList['test/**/*_test.rb']
-    t.verbose = true
+  require 'simplecov'
+  SimpleCov.command_name 'test:units'
+  SimpleCov.start do
+    add_filter '/test/'
   end
+  require_relative 'test/test_slug'
+
 rescue LoadError
-  puts "RCov is not available. In order to run rcov, you must: sudo gem install spicycode-rcov"
+  puts 'simplecov is not available. In order to run simplecov, please run: bundle install'
 end
 
 task :default => :test

@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 require File.dirname(__FILE__) + '/test_helper'
 
 class TestSlug < Test::Unit::TestCase
@@ -44,14 +46,13 @@ class TestSlug < Test::Unit::TestCase
   should "set validation error if source column is empty" do
     article = Article.create
     assert !article.valid?
-    require 'ruby-debug'
-    assert article.errors.on(:slug)
+    assert article.errors[:slug]
   end
   
   should "set validation error if normalization makes source value empty" do
     article = Article.create(:headline => '$$$')
     assert !article.valid?
-    assert article.errors.on(:slug)
+    assert article.errors[:slug]
   end
   
   should "not update the slug even if the source column changes" do

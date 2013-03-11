@@ -26,5 +26,5 @@ ActiveRecord::Schema.define(:version => 1) do
     t.column "location", "string"
     t.column "slug", "string"
   end
-  
+
 end

@@ -12,11 +12,7 @@ Here's what's different:
 
 == INSTALLATION
 
-  sudo gem install slug --source http://gemcutter.org
-
-then add
-
-  config.gem 'slug', :source => 'http://gemcutter.org'
+  gem 'slug',                      :git => 'git://github.com/willdrew/slug.git'
 
 to your rails project.
 

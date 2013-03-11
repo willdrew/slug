@@ -5,7 +5,7 @@
 
 Gem::Specification.new do |s|
   s.name = %q{slug}
-  s.version = "0.5.7"
+  s.version = "0.6.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Ben Koski"]
@@ -14,12 +14,12 @@ Gem::Specification.new do |s|
   s.email = %q{ben.koski@gmail.com}
   s.extra_rdoc_files = [
     "LICENSE",
-     "README.rdoc"
+     "README.md"
   ]
   s.files = [
     ".gitignore",
      "LICENSE",
-     "README.rdoc",
+     "README.md",
      "Rakefile",
      "VERSION.yml",
      "lib/slug.rb",
