@@ -6,6 +6,10 @@ Slug Change Log
 - Further cleanup of rake tasks
 - Use Bundler instead of jeweler to create gem/publish
 
+0.6.1
+---
+- Rails 4.0 Support
+
 0.6.0
 ---
 - Added .rvmrc, .gems, Gemfile, Gemfile.lock, changelog.md files to project base
