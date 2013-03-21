@@ -32,18 +32,21 @@ module Slug
       
       validates                 self.slug_column, :presence => { :message => "cannot be blank. Is #{self.slug_source} sluggable?" }
       validates                 self.slug_column, :uniqueness => uniqueness_opts
-      validates                 self.slug_column, :format => { :with => /^[a-z0-9\-\_]+$/, :message => "contains invalid characters. Only downcase letters, numbers, and '-' are allowed." }
+      validates                 self.slug_column, :format => { :with => /\A[a-z0-9\-\_]+\z/, :message => "contains invalid characters. Only downcase letters, numbers, and '-' are allowed." }
       before_validation :set_slug, :on => :create
     end
 
     def find_with_slug(*args)
       key = args.first
       if key.is_a?(Symbol) || key.kind_of?(Numeric) || key.kind_of?(Array) || key =~ /\A\d+\z/
-        find_without_slug(*args)
+        if key.is_a?(Symbol)
+          find_without_slug send key
+        else
+          find_without_slug *args
+        end
       else
-        options = {:conditions => ["#{slug_column} = ?", key]}
-        with_scope(:find => options) do
-          find_without_slug(:first) || raise(ActiveRecord::RecordNotFound.new("Couldn't find #{name} with #{slug_column} '#{key}'"))
+        self.where(slug_column.to_sym => key).scoping do
+          first || raise(ActiveRecord::RecordNotFound.new("Couldn't find #{name} with #{slug_column} '#{key}'"))
         end
       end
     end
