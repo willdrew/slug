@@ -9,6 +9,7 @@ Slug Change Log
 0.6.1
 ---
 - Rails 4.0 Support
+- Tweaks
 
 0.6.0
 ---
