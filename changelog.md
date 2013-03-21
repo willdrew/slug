@@ -6,6 +6,12 @@ Slug Change Log
 - Further cleanup of rake tasks
 - Use Bundler instead of jeweler to create gem/publish
 
+0.6.2
+---
+- Updated code to remove some additional deprecation warnings
+- Cherry-picked in some commits from other public repositories
+- Added Rob's and my name to the contributions section, since I forked his branch
+
 0.6.1
 ---
 - Rails 4.0 Support
