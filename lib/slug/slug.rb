@@ -129,7 +129,7 @@ module Slug
   
     # Returns the next unique index for a slug.
     def next_slug_sequence
-      # last_in_sequence = self.class.where("#{self.slug_column} LIKE ?", self[self.slug_column] + '%').order("CAST(REPLACE(#{self.slug_column},'#{self[self.slug_column]}','') AS UNSIGNED)").first
+      # last_in_sequence = self.class.where("#{self.slug_column} LIKE ?", self[self.slug_column] + '%').order("CAST(REPLACE(#{self.slug_column},'#{self[self.slug_column]}','') AS UNSIGNED) DESC").first
       find_ops = {:conditions => ["#{self.slug_column} LIKE ?", self[self.slug_column] + '%'],
                   :order => "ABS(CAST(REPLACE(#{self.slug_column},'#{self[self.slug_column]}','') AS SIGNED)) DESC"}
       if self.class.respond_to?(:find_with_deleted)
